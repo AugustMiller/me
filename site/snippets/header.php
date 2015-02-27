@@ -14,9 +14,6 @@
 </head>
 <body>
 
-  <header class="header cf" role="banner">
-    <a class="logo" href="<?= url() ?>">
-      <img src="<?= url('assets/images/logo.svg') ?>" alt="<?= $site->title()->html() ?>" />
-    </a>
-    <? snippet('menu') ?>
+  <header>
+    August Winfield Miller
   </header>
