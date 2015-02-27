@@ -1,7 +1,11 @@
 <? snippet('header') ?>
 
   <main>
-    It&apos;s 2015!
+    <article>
+      <div class="column full">
+        <?= $page->text()->kirbytext() ?>
+      </div>
+    </article>
   </main>
 
 <? snippet('footer') ?>

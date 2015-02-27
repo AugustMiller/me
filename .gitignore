@@ -4,3 +4,5 @@ site/config
 site/accounts
 assets/.sass-cache
 assets/css
+node_modules
+assets/fonts/publico-mono
