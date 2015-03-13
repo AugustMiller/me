@@ -4,10 +4,11 @@ $ ->
   window.AWM.UI.Background = new window.AWM.Classes.ColorClock 'body', window.AWM.UI.Sun,
     hue:
       fn: ->
-        new Date().getDay()
+        time = new Date()
+        time.getTime() - time.weekStart()
         # Math.random() * 7
       min: 0
-      max: 6
+      max: Date.prototype.WEEK_IN_MILISECONDS
     saturation:
       fn: ->
         1
@@ -17,16 +18,13 @@ $ ->
       fn: ->
         window.AWM.UI.Sun.approximate_brightness()
       min: 0
-      max: 1
-    ,
-    ->
-      console.log "haha"
-
-  canvas = 
+      max: 1.5
 
   window.AWM.UI.Pen = new window.AWM.Classes.Ink
-    color: window.AWM.UI.Background.as_complementary_css_color()
+    color: window.AWM.UI.Background.complementary_as_css_color()
     canvas_unsupported: window.AWM.Storage.canvas_unsupported
-    splatter_threshold: 5
+    splatter_threshold: 10
+    max_brush_width: 10
+    blotchiness: 15
 
 

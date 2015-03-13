@@ -4,9 +4,9 @@ window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorCloc
     @options = $.extend true,
       hue:
         fn: ->
-          Math.random() * 360
+          Math.random()
         min: 0
-        max: 360
+        max: 1
       saturation:
         fn: ->
           Math.random()
@@ -35,7 +35,7 @@ window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorCloc
 
   colorize: ->
     @el.css
-      # 'background-color': @as_css_color()
+      'background-color': @faded_as_css_color()
       'color': @as_css_color()
 
   classify: ->
@@ -45,8 +45,12 @@ window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorCloc
   as_css_color: ->
     "hsl(#{@hue()}, #{@saturation() * 100}%, #{@lightness() * 100}%)"
 
-  as_complementary_css_color: ->
+  complementary_as_css_color: ->
     "hsl(#{@hue() + 10}, #{@saturation() * 100}%, #{@lightness() * 100 + 20}%)"
+
+  faded_as_css_color: ->
+    "hsl(#{@hue()}, #{@saturation() * 60}%, #{@lightness() * 100 + 40}%)"
+
 
   is_dark: ->
     @lightness < ( @options.lightness.min + @options.lightness.max ) / 2

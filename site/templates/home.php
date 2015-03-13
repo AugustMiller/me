@@ -14,6 +14,14 @@
         <?= $page->recent()->kirbytext() ?>
       </div>
     </article>
+    <article>
+      <div class="column full spacer"></div>
+    </article>
+    <article>
+      <div class="column full">
+        <?= $page->experience()->kirbytext() ?>
+      </div>
+    </article>
   </main>
 
 <? snippet('footer') ?>

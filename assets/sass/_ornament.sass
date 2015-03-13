@@ -1,7 +1,10 @@
 a
   // +transition(0.075s, ease-out, all)
   &:hover
-    +filter(blur(6px))
+    +blur
+
+::selection
+  // background: lighten($color-black, 80%)
 
 .spacer
   margin: 1em 0

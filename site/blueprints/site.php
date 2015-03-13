@@ -21,3 +21,11 @@ fields:
   colophon:
     label: Colophon
     type: textarea
+
+  utility:
+    label: Utility
+    type: headline
+
+  ga_key:
+    label: Google Analytics Tracking Key
+    type: text

@@ -1,34 +1,38 @@
 window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   constructor: (options) ->
     @options = $.extend
+      color: 'red'
       splatter_threshold: 10
+      max_brush_width: 10
+      blotchiness: 10
     , options
 
     @canvas = $('<canvas />').attr
       width: window.innerWidth
-      height: window.innerHeight
+      height: window.AWM.Storage.document_height()
+    @canvas.appendTo('body')
+
     @context = @canvas[0].getContext('2d')
     @context.strokeStyle = @options.color;
     @context.fillStyle = @options.color;
     @context.lineJoin = "round";
     @context.lineCap = "butt";
 
-    @canvas.appendTo('body')
     @listen()
 
   listen: ->
-    $(window).on 'mousemove', (e) =>
-      @cache e
+    $(document).on 'mousemove', (e) =>
+      @track e
       @draw()
 
-  distance: (start, end) ->
+  delta: (start, end) ->
     Math.sqrt(Math.pow((start.y - end.y), 2) + Math.pow((start.x - end.x), 2))
 
   time_elapsed: ->
     @current.time - @previous().time
 
   velocity: ->
-    @distance(@current, @previous()) / @time_elapsed()
+    @delta(@current, @previous()) / @time_elapsed()
 
   trajectory: ->
     {
@@ -37,7 +41,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     }
 
   stroke_width: ->
-    10 / Math.sqrt(@velocity()).map 0, 10, 1, 10
+    @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness
 
   previous: ->
     @last_event or
@@ -47,27 +51,41 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
 
   draw: (e) ->
     @context.beginPath()
-    @context.moveTo @previous().x, @previous().y
-    @context.lineTo @current.x, @current.y
-    @context.closePath()
-    @context.lineWidth = @stroke_width()
-    @context.stroke()
+    @line @previous(), @current, @stroke_width()
     @splatter() if @velocity() > @options.splatter_threshold
   
-  cache: (e) ->
-    @last_event = @current
-    @current =
-      x: e.clientX
-      y: e.clientY
+  track: (e) ->
+    now =
+      x: e.pageX
+      y: e.pageY
       time: e.timeStamp
 
+    unless @last_event?
+      @last_event = @current = now
+    else
+      @last_event = @current
+      @current = now
+
+    @mileage += @delta @current, @previous()
+
+  line: (from, to, width) ->
+    @context.moveTo from.x, from.y
+    @context.lineTo to.x, to.y
+    @context.closePath()
+    @context.lineWidth = width
+    @context.stroke()
+
   splatter: ->
-    console.log "Could cause splatter", @velocity()
-    if Math.random() * 5 > 2.5
+    if Math.random() > 0.5
       location = @trajectory()
       size = Math.pow @velocity(), Math.random()
-      @context.beginPath()
-      @context.arc location.x, location.y, size, 0, 2 * Math.PI
-      @context.fill()
+      @spot location, size
 
+  spot: (location, radius) ->
+    @context.beginPath()
+    @context.arc location.x, location.y, radius, 0, 2 * Math.PI
+    @context.fill()
+
+  clear: ->
+    @context.clearRect 0, 0, @canvas.width, canvas.height
 

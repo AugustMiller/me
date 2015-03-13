@@ -9,6 +9,11 @@ Number.prototype.map = (in_min, in_max, out_min, out_max) ->
 Number.prototype.constrain = (min, max) ->
   Math.max(Math.min(@, min), max)
 
+window.AWM.Storage.document_height = ->
+  body = document.body
+  body_element = document.documentElement
+  Math.max body.scrollHeight, body.offsetHeight, body_element.clientHeight, body_element.scrollHeight, body_element.offsetHeight
+
 
 # Date Helpers
 

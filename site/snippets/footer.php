@@ -11,5 +11,6 @@
     </article>
   </footer>
   <?= js('assets/javascript/awm.js') ?>
+  <? snippet('analytics') ?>
 </body>
 </html>
