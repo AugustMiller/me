@@ -1,12 +1,25 @@
 // Super Basic
 
+*
+  +box-sizing(border-box)
+
 body
-  padding: 2%
+  padding: 2rem 1rem
   // background: hsl(180, 100%, 50%)
   // +transform(skew(-6deg) rotate(-6deg)  )
+  +mobile
+    padding: 1rem 0.5rem
+
+header, main, footer
+  position: relative
+  z-index: 10
 
 // Links
 
 a
   text-decoration: underline
   color: inherit
+
+
+h1
+  // +transition(0.15s linear color)

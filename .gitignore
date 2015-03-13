@@ -6,4 +6,5 @@ assets/.sass-cache
 assets/css
 assets/javascript
 node_modules
-assets/fonts/publico-mono
+assets/fonts/publico-mono/*
+!assets/fonts/publico-mono/.htaccess

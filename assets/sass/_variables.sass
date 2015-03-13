@@ -1,6 +1,15 @@
 /* Variables */
 
 //
+// Breakpoints
+//
+
+$breakpoint-mobile-max: 640px
+$breakpoint-tablet-min: $breakpoint-mobile-max + 1px
+$breakpoint-tablet-max: 1024px
+$breakpoint-desktop-min: $breakpoint-tablet-max + 1px
+
+//
 // Typography
 //
 
@@ -10,6 +19,17 @@ $type-family-bold: 'Publico Text Mono Web Bold', 'Monaco', monospace
 
 // Sizes
 $type-size-base: 28px
+$type-size-small: ( $type-size-base / 2 )
 
 // Leading
 $type-leading-base: 1.35
+
+//
+// Color
+//
+
+$color-white: #FFF
+$color-light: transparentize($color-white, 0.5)
+
+$color-black: #000
+$color-dark: transparentize($color-black, 0.5)

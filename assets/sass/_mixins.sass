@@ -1,0 +1,7 @@
+@mixin mobile
+  @media screen and (max-width: $breakpoint-mobile-max)
+    @content
+
+@mixin tablet
+  @media screen and (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max)
+    @content

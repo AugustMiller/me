@@ -18,3 +18,6 @@ fields:
   footer:
     label: Footer
     type:  textarea
+  colophon:
+    label: Colophon
+    type: textarea

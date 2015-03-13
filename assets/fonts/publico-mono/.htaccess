@@ -1,0 +1,6 @@
+Options -Indexes
+IndexIgnore *.ttf
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?next\.dev|gusmiller.com/.*$ [NC]
+RewriteRule \.ttf$ - [F]

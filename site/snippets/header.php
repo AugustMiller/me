@@ -11,8 +11,10 @@
   <meta name="author" content="<?= $site->author() ?>">
 
   <?= css('assets/css/awm.css') ?>
-  <?#= css('http://fonts.googleapis.com/css?family=Fira+Mono:400,700') ?>
-  <?= css('assets/fonts/publico-mono/1502-BJGGWI.css') ?>
+  <?= css('assets/fonts/publico-mono/i-paid-for-these-and-so-should-you.css') ?>
+  <?= js('https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js') ?>
+
+  <? snippet('js-global-object') ?>
 
 </head>
 <body class="<?= body_classes(['awm']) ?>">
@@ -22,6 +24,7 @@
       <div class="column full">
         <h1>
           <?= html::a(url(), $site->author()->html()) ?>
+        </h1>
       </div>
     </article>
   </header>

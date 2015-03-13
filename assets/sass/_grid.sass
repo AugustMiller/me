@@ -1,25 +1,45 @@
+article
+  font-size: 0
+
 article::after
   clear: both
   content: ''
   display: table
 
 .column
-  float: left
+  display: inline-block
+  font-size: 1rem
+  padding: 0 1rem
+
+  +mobile
+    padding: 0
 
 .quarter
   width: ( 100% / 4 )
+  +mobile
+    width: auto
 
 .third
   width: ( 100% / 3 )
+  +mobile
+    width: auto
 
 .half
   width: ( 100% / 2 )
+  +mobile
+    width: auto
 
 .two-thirds
   width: ( 100% * 2 / 3 )
+  +mobile
+    width: auto
 
 .three-quarters
   width: ( 100% * 3 / 4 )
+  +mobile
+    width: auto
 
 .full
   width: ( 100% )
+  +mobile
+    width: auto
