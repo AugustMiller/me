@@ -16,3 +16,6 @@ fields:
   experience:
     label: Experience
     type: textarea
+  contact:
+    label: Contact Information
+    type: textarea
