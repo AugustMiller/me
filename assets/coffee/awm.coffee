@@ -39,7 +39,7 @@ $ ->
     From time to time, we might update the color palette, like as the sun goes down.
   ###
 
-  window.AWM.Storage.update_color = ->
+  window.AWM.Functions.update_color = ->
     color = window.AWM.Storage.color_current = window.AWM.UI.Color.hsl()
     $('body').css
       'color': "hsl(#{color.h}, #{color.s}%, #{color.l}%)"
@@ -47,9 +47,9 @@ $ ->
 
   window.AWM.Storage.color_on_load = window.AWM.UI.Color.hsl()
 
-  window.AWM.Storage.update_color()
+  window.AWM.Functions.update_color()
     
-  window.setInterval window.AWM.Storage.update_color, 500
+  window.setInterval window.AWM.Functions.update_color, 500
 
 
   ###

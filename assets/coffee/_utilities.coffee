@@ -12,7 +12,7 @@ Number.prototype.constrain = (min, max) ->
 Number.prototype.random_within = (distance) ->
   Math.random().map 0, 1, @ - distance, @ + distance
 
-window.AWM.Storage.document_height = ->
+window.AWM.Functions.document_height = ->
   body = document.body
   body_element = document.documentElement
   Math.max body.scrollHeight, body.offsetHeight, body_element.clientHeight, body_element.scrollHeight, body_element.offsetHeight

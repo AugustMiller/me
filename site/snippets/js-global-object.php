@@ -3,6 +3,7 @@
 <script>
   window.AWM = window.AWM || {
     Classes: {},
+    Functions: {},
     UI: {},
     Storage: {
       sunrise: <?= get_sunrise() ?>,

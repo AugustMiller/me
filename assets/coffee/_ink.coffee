@@ -11,7 +11,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
 
     @canvas = $('<canvas />').attr
       width: window.innerWidth
-      height: window.AWM.Storage.document_height()
+      height: window.AWM.Functions.document_height()
     @canvas.appendTo('body')
 
     @context = @canvas[0].getContext('2d')
