@@ -19,9 +19,6 @@ window.AWM.Classes.Colorizer = window.AWM.Classes.Colorizer or class Colorizer
         max: 1
     , options
 
-    # @classify()
-    # @colorize()
-
     console.log @
 
   hue: ->
@@ -41,15 +38,6 @@ window.AWM.Classes.Colorizer = window.AWM.Classes.Colorizer or class Colorizer
     h: @hue()
     s: @saturation()
     l: @lightness()
-
-  parse_template: (template) ->
-    template.replace /\{\{([hsl])\}\}/g, (match, part) =>
-      console.log "Found a match: #{part}"
-      @get_color_part part
-
-  get_color_part: (part) ->
-    console.log "Getting #{part}"
-    @hsl()[part]
 
   is_dark: ->
     @lightness < ( @options.lightness.min + @options.lightness.max ) / 2
