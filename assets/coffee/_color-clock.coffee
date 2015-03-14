@@ -1,4 +1,4 @@
-window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorClock
+window.AWM.Classes.Colorizer = window.AWM.Classes.Colorizer or class Colorizer
   constructor: (el, @sun, options) ->
     @el = $(el)
     @options = $.extend true,
@@ -19,8 +19,8 @@ window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorCloc
         max: 1
     , options
 
-    @classify()
-    @colorize()
+    # @classify()
+    # @colorize()
 
     console.log @
 
@@ -28,29 +28,28 @@ window.AWM.Classes.ColorClock = window.AWM.Classes.ColorClock or class ColorCloc
     @options.hue.fn().map @options.hue.min, @options.hue.max, 0, 360
 
   saturation: ->
-    @options.saturation.fn().map @options.saturation.min, @options.saturation.max, 0, 1
+    @options.saturation.fn().map @options.saturation.min, @options.saturation.max, 0, 100
 
   lightness: ->
-    @options.lightness.fn().map @options.lightness.min, @options.lightness.max, 0, 1
-
-  colorize: ->
-    @el.css
-      'background-color': @faded_as_css_color()
-      'color': @as_css_color()
+    @options.lightness.fn().map @options.lightness.min, @options.lightness.max, 0, 100
 
   classify: ->
     @el.removeClass 'dark'
     @el.addClass 'dark' if @is_dark()
 
-  as_css_color: ->
-    "hsl(#{@hue()}, #{@saturation() * 100}%, #{@lightness() * 100}%)"
+  hsl: ->
+    h: @hue()
+    s: @saturation()
+    l: @lightness()
 
-  complementary_as_css_color: ->
-    "hsl(#{@hue() + 10}, #{@saturation() * 100}%, #{@lightness() * 100 + 20}%)"
+  parse_template: (template) ->
+    template.replace /\{\{([hsl])\}\}/g, (match, part) =>
+      console.log "Found a match: #{part}"
+      @get_color_part part
 
-  faded_as_css_color: ->
-    "hsl(#{@hue()}, #{@saturation() * 60}%, #{@lightness() * 100 + 40}%)"
-
+  get_color_part: (part) ->
+    console.log "Getting #{part}"
+    @hsl()[part]
 
   is_dark: ->
     @lightness < ( @options.lightness.min + @options.lightness.max ) / 2

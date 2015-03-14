@@ -1,3 +1,6 @@
+*
+  cursor: none
+
 a
   // +transition(0.075s, ease-out, all)
   &:hover
@@ -10,3 +13,7 @@ a
   margin: 1em 0
   &::before
     content: '—'
+
+  &.special
+    &::before
+      content: '\2404'

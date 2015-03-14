@@ -1,7 +1,8 @@
 window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   constructor: (options) ->
     @options = $.extend
-      color: 'red'
+      color: ->
+        'red'
       splatter_threshold: 10
       max_brush_width: 10
       blotchiness: 10
@@ -13,12 +14,14 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     @canvas.appendTo('body')
 
     @context = @canvas[0].getContext('2d')
-    @context.strokeStyle = @options.color;
-    @context.fillStyle = @options.color;
+    @context.strokeStyle = @options.color()
+    @context.fillStyle = @options.color()
     @context.lineJoin = "round";
     @context.lineCap = "butt";
 
     @listen()
+
+    console.log @
 
   listen: ->
     $(document).on 'mousemove', (e) =>
