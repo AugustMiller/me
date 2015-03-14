@@ -5,6 +5,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
         'red'
       splatter_threshold: 10
       max_brush_width: 10
+      max_splats: 10
       blotchiness: 10
     , options
 
@@ -92,3 +93,9 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   clear: ->
     @context.clearRect 0, 0, @canvas.width, canvas.height
 
+  blot: (e) ->
+    for drop in [0..(Math.random() * @options.max_splats)]
+      @spot
+        x: e.pageX.random_within 50
+        y: e.pageY.random_within 50
+      , Math.sqrt(Math.random() * 1000) 

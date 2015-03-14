@@ -9,6 +9,9 @@ Number.prototype.map = (in_min, in_max, out_min, out_max) ->
 Number.prototype.constrain = (min, max) ->
   Math.max(Math.min(@, min), max)
 
+Number.prototype.random_within = (distance) ->
+  Math.random().map 0, 1, @ - distance, @ + distance
+
 window.AWM.Storage.document_height = ->
   body = document.body
   body_element = document.documentElement
