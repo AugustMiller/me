@@ -42,7 +42,7 @@ $ ->
       color = window.AWM.Storage.color_current
       "hsl(#{(color.h - 40) % 360}, #{color.s}%, #{color.l.map 0, 100, 20, 100}%)"
     canvas_unsupported: window.AWM.Storage.canvas_unsupported
-    splatter_threshold: 8
+    splatter_threshold: 6
     max_brush_width: 10
     blotchiness: 15
 
