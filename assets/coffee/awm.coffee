@@ -41,8 +41,8 @@ $ ->
 
   window.AWM.Functions.update_color = ->
     color = window.AWM.Storage.color_current = window.AWM.UI.Color.hsl()
-    $('body').css
-      'color': "hsl(#{color.h}, #{color.s}%, #{color.l}%)"
+    # $('body').css
+      # 'color': "hsl(#{color.h}, #{color.s}%, #{color.l}%)"
       # 'background-color': "hsl(#{color.h}, #{color.s * 0.75}%, #{color.l.map 0, 100, 80, 100}%)"
 
   window.AWM.Storage.color_on_load = window.AWM.UI.Color.hsl()
