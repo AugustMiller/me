@@ -12,7 +12,6 @@
 
   <?= css('assets/css/awm.css') ?>
   <?= css('assets/fonts/publico-mono/i-paid-for-these-and-so-should-you.css') ?>
-  <?= js('https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js') ?>
 
   <? snippet('js-global-object') ?>
 
