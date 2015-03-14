@@ -10,8 +10,8 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     , options
 
     @canvas = $('<canvas />').attr
-      width: window.innerWidth
-      height: window.AWM.Functions.document_height()
+      width: window.innerWidth * 2
+      height: window.AWM.Functions.document_height() * 2
     @canvas.appendTo('body')
 
     @context = @canvas[0].getContext('2d')
@@ -36,14 +36,14 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   velocity: ->
     @delta(@current, @previous()) / @time_elapsed()
 
-  trajectory: ->
+  trajectory: (multiplier = 1)->
     {
-      x: @current.x + (@current.x - @previous().x) * 2
-      y: @current.y + (@current.y - @previous().y) * 2
+      x: ( @current.x + (@current.x - @previous().x) * 2 ) * multiplier
+      y: ( @current.y + (@current.y - @previous().y) * 2 ) * multiplier
     }
 
   stroke_width: ->
-    @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness
+    ( @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness ) * 2
 
   previous: ->
     @last_event or
@@ -76,8 +76,8 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
 
   line: (from, to, width) ->
     @colorize()
-    @context.moveTo from.x, from.y
-    @context.lineTo to.x, to.y
+    @context.moveTo from.x * 2, from.y * 2
+    @context.lineTo to.x * 2, to.y * 2
     @context.closePath()
     @context.lineWidth = width
     @context.stroke()
@@ -91,7 +91,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   spot: (location, radius) ->
     @colorize()
     @context.beginPath()
-    @context.arc location.x, location.y, radius, 0, 2 * Math.PI
+    @context.arc location.x * 2, location.y * 2, radius * 2, 0, 2 * Math.PI
     @context.fill()
 
   clear: ->
