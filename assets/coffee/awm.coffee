@@ -1,6 +1,19 @@
 $ ->
 
+  ###
+    Hi, I'm glad you're here.
+  ###
+
+  ###
+    Let's keep track of where we are in the day.
+  ###
+
   window.AWM.UI.Sun = new window.AWM.Classes.Sol window.AWM.Storage.sunrise, window.AWM.Storage.sunset
+
+  ###
+    This will help us generate meaningful HSL values from incoming data.
+    Psst! See where this is going?
+  ###
 
   window.AWM.UI.Color = new window.AWM.Classes.Colorizer 'body', window.AWM.UI.Sun,
     hue:
@@ -20,11 +33,12 @@ $ ->
       min: 0
       max: 1.5
 
-  # Helper functions for monitoring colors
+  ###
+    From time to time, we might update the color palette, like as the sun goes down.
+  ###
 
   window.AWM.Storage.update_color = ->
     color = window.AWM.Storage.color_current = window.AWM.UI.Color.hsl()
-    # console.log color
     $('body').css
       'color': "hsl(#{color.h}, #{color.s}%, #{color.l}%)"
       'background-color': "hsl(#{color.h}, #{color.s * 0.75}%, #{color.l.map 0, 100, 80, 100}%)"
@@ -35,7 +49,10 @@ $ ->
     
   window.setInterval window.AWM.Storage.update_color, 500
 
-  # This is a lot of fun
+
+  ###
+    I thought this might be fun to play with.
+  ###
 
   window.AWM.UI.Pen = new window.AWM.Classes.Ink
     color: ->
