@@ -15,8 +15,6 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     @canvas.appendTo('body')
 
     @context = @canvas[0].getContext('2d')
-    @context.strokeStyle = @options.color()
-    @context.fillStyle = @options.color()
     @context.lineJoin = "round";
     @context.lineCap = "butt";
 
@@ -72,7 +70,12 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
 
     @mileage += @delta @current, @previous()
 
+  colorize: ->
+    @context.strokeStyle = @options.color()
+    @context.fillStyle = @options.color()
+
   line: (from, to, width) ->
+    @colorize()
     @context.moveTo from.x, from.y
     @context.lineTo to.x, to.y
     @context.closePath()
@@ -86,6 +89,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       @spot location, size
 
   spot: (location, radius) ->
+    @colorize()
     @context.beginPath()
     @context.arc location.x, location.y, radius, 0, 2 * Math.PI
     @context.fill()
@@ -99,3 +103,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
         x: e.pageX.random_within 50
         y: e.pageY.random_within 50
       , Math.sqrt(Math.random() * 1000) 
+
+  change_color: (new_color) ->
+    @context.strokeStyle = new_color
+    @context.fillStyle = new_color

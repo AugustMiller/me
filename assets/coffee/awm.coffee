@@ -18,10 +18,12 @@ $ ->
   window.AWM.UI.Color = new window.AWM.Classes.Colorizer 'body', window.AWM.UI.Sun,
     hue:
       fn: ->
-        time = new Date()
-        time.getTime() - time.weekStart()
+        # time = new Date()
+        # time.getTime() - time.weekStart()
+        new Date().getTime() % 36000
       min: 0
-      max: Date.prototype.WEEK_IN_MILISECONDS
+      # max: 360
+      max: 36000
     saturation:
       fn: ->
         1
@@ -41,7 +43,7 @@ $ ->
     color = window.AWM.Storage.color_current = window.AWM.UI.Color.hsl()
     $('body').css
       'color': "hsl(#{color.h}, #{color.s}%, #{color.l}%)"
-      'background-color': "hsl(#{color.h}, #{color.s * 0.75}%, #{color.l.map 0, 100, 80, 100}%)"
+      # 'background-color': "hsl(#{color.h}, #{color.s * 0.75}%, #{color.l.map 0, 100, 80, 100}%)"
 
   window.AWM.Storage.color_on_load = window.AWM.UI.Color.hsl()
 
@@ -56,8 +58,8 @@ $ ->
 
   window.AWM.UI.Pen = new window.AWM.Classes.Ink
     color: ->
-      color = window.AWM.Storage.color_current
-      "hsl(#{(color.h - 40) % 360}, #{color.s}%, #{color.l.map 0, 100, 20, 100}%)"
+      color = window.AWM.UI.Color.hsl()
+      "hsl(#{(color.h - 40) % 360}, #{color.s}%, #{color.l.map 0, 100, 50, 100}%)"
     canvas_unsupported: window.AWM.Storage.canvas_unsupported
     splatter_threshold: 1
     max_brush_width: 10
