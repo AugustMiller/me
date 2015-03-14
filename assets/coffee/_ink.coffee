@@ -9,6 +9,8 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       blotchiness: 10
     , options
 
+    @distance_drawn = 0
+
     @canvas = $('<canvas />').attr
       width: window.innerWidth * 2
       height: window.AWM.Functions.document_height() * 2
@@ -27,7 +29,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       @track e
       @draw()
 
-  delta: (start, end) ->
+  delta: (start = @previous(), end = @current) ->
     Math.sqrt(Math.pow((start.y - end.y), 2) + Math.pow((start.x - end.x), 2))
 
   time_elapsed: ->
@@ -52,6 +54,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       time: new Date()
 
   draw: (e) ->
+    @distance_drawn += @delta()
     @context.beginPath()
     @line @previous(), @current, @stroke_width()
     @splatter() if @velocity() > @options.splatter_threshold
