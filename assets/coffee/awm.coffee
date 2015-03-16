@@ -56,7 +56,7 @@ $ ->
     I thought this might be fun to play with.
   ###
 
-  window.AWM.UI.Pen = new window.AWM.Classes.Ink
+  if 'ontouchstart' not in window then window.AWM.UI.Pen = new window.AWM.Classes.Ink
     color: ->
       color = window.AWM.UI.Color.hsl()
       "hsl(#{(color.h - 40) % 360}, #{color.s}%, #{color.l.map 0, 100, 50, 100}%)"
