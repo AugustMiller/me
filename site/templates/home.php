@@ -38,7 +38,7 @@
     </article>
 
     <article>
-      <div class="column full spacer special"></div>
+      <div class="column full spacer smiley"></div>
     </article>
   </main>
 
