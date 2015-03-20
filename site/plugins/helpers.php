@@ -23,3 +23,13 @@ function get_location ( ) {
     'lng' => c::get('location.lng')
   ];
 }
+
+# Environment
+
+function is_development ( ) {
+  return ( c::get('environment') == 'development' );
+}
+
+function is_production ( ) {
+  return ( c::get('environment') == 'production' );
+}
