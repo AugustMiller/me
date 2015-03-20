@@ -7,14 +7,17 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       max_brush_width: 10
       max_splats: 10
       blotchiness: 10
+      canvas_size: window.innerWidth * 2
+      canvas_frame: $('.canvas-frame')
     , options
 
     @distance_drawn = 0
 
     @canvas = $('<canvas />').attr
-      width: window.innerWidth * 2
-      height: window.AWM.Functions.document_height() * 2
-    @canvas.appendTo('body')
+      width: @options.canvas_size * @scale()
+      height: @options.canvas_size * @scale()
+    @canvas.appendTo @options.canvas_frame
+    @canvas.width @options.canvas_size
 
     @context = @canvas[0].getContext('2d')
     @context.lineJoin = "round";
@@ -29,6 +32,10 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       @track e
       @draw()
 
+  scale: ->
+    console.log window.devicePixelRatio
+    if window.hasOwnProperty('devicePixelRatio') then window.devicePixelRatio else 1
+
   delta: (start = @previous(), end = @current) ->
     Math.sqrt(Math.pow((start.y - end.y), 2) + Math.pow((start.x - end.x), 2))
 
@@ -38,14 +45,14 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   velocity: ->
     @delta(@current, @previous()) / @time_elapsed()
 
-  trajectory: (multiplier = 1)->
+  trajectory: ->
     {
-      x: ( @current.x + (@current.x - @previous().x) * 2 ) * multiplier
-      y: ( @current.y + (@current.y - @previous().y) * 2 ) * multiplier
+      x: ( @current.x + (@current.x - @previous().x) * 2 ) * @scale()
+      y: ( @current.y + (@current.y - @previous().y) * 2 ) * @scale()
     }
 
   stroke_width: ->
-    ( @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness ) * 2
+    ( @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness ) * @scale()
 
   previous: ->
     @last_event or
@@ -79,8 +86,8 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
 
   line: (from, to, width) ->
     @colorize()
-    @context.moveTo from.x * 2, from.y * 2
-    @context.lineTo to.x * 2, to.y * 2
+    @context.moveTo from.x * @scale(), from.y * @scale()
+    @context.lineTo to.x * @scale(), to.y * @scale()
     @context.closePath()
     @context.lineWidth = width
     @context.stroke()
@@ -94,7 +101,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
   spot: (location, radius) ->
     @colorize()
     @context.beginPath()
-    @context.arc location.x * 2, location.y * 2, radius * 2, 0, 2 * Math.PI
+    @context.arc location.x, location.y, radius * @scale(), 0, 2 * Math.PI
     @context.fill()
 
   clear: ->

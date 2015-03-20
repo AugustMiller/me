@@ -61,7 +61,9 @@ $ ->
       color = window.AWM.UI.Color.hsl()
       "hsl(#{(color.h - 40) % 360}, #{color.s}%, #{color.l.map 0, 100, 50, 100}%)"
     canvas_unsupported: window.AWM.Storage.canvas_unsupported
-    splatter_threshold: 1
+    splatter_threshold: 1.5
     max_brush_width: 10
     blotchiness: 15
+    canvas_size: Math.max window.innerWidth, window.AWM.Functions.document_height()
+    canvas_frame: $('.canvas-frame')
 
