@@ -33,7 +33,6 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
       @draw()
 
   scale: ->
-    console.log window.devicePixelRatio
     if window.hasOwnProperty('devicePixelRatio') then window.devicePixelRatio else 1
 
   delta: (start = @previous(), end = @current) ->
