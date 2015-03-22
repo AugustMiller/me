@@ -11,7 +11,7 @@
   <meta name="author" content="<?= $site->author() ?>">
 
   <?= css('assets/css/awm.css') ?>
-  <?= css('assets/fonts/publico-mono/i-paid-for-these-and-so-should-you.css') ?>
+  <?#= css('assets/fonts/publico-mono/i-paid-for-these-and-so-should-you.css') ?>
 
   <? snippet('js-global-object') ?>
 
