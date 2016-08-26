@@ -1,14 +1,21 @@
 html
   font-size: $type-size-base
   font-family: $type-family-base
-  line-height: $type-leading-base
+
   +mobile
     font-size: $type-size-base-mobile
 
+body
+  line-height: $type-leading-base
 
-#{headers(all)}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
   font-family: $type-family-bold
-  // font-style: italic
   margin-bottom: 1em
 
 p

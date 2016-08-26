@@ -1,6 +1,7 @@
-window.AWM.Classes.Sol = window.AWM.Classes.Sol or class Sol
+Map = require 'util/number-map'
+
+module.exports = class Sol
   constructor: (@sunrise, @sunset) ->
-    console.log @
 
   now: ->
     new Date().getTime()
@@ -30,7 +31,7 @@ window.AWM.Classes.Sol = window.AWM.Classes.Sol or class Sol
     @now() - @day_mid()
 
   day_progress_as_decimal: ->
-    @day_progress().map -@constants.day_half, @constants.day_half, 0, 1
+    Map @day_progress(), -@constants.day_half, @constants.day_half, 0, 1
 
   approximate_brightness: ->
     Math.cos( (2 * Math.PI * @day_progress_as_decimal()) + Math.PI) / 2 + 0.5

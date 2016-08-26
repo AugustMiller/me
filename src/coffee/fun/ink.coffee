@@ -1,8 +1,13 @@
-window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
+_ = require 'underscore'
+$ = require 'cash-dom'
+
+Map = require 'util/number-map'
+
+module.exports = class Ink
   constructor: (options) ->
-    @options = $.extend
-      color: ->
-        'red'
+    @options = _.extend
+      color: (ink) ->
+        "hsl(#{ink.distance_drawn / 100 % 360}, 100%, 50%)"
       splatter_threshold: 10
       max_brush_width: 10
       max_splats: 10
@@ -24,8 +29,6 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     @context.lineCap = "butt";
 
     @listen()
-
-    console.log @
 
   listen: ->
     $(document).on 'mousemove', (e) =>
@@ -51,7 +54,7 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     }
 
   stroke_width: ->
-    ( @options.max_brush_width / Math.sqrt(@velocity()).map 0, @options.blotchiness, 1, @options.blotchiness ) * @scale()
+    (@options.max_brush_width / Map Math.sqrt(@velocity()), 0, @options.blotchiness, 1, @options.blotchiness) * @scale()
 
   previous: ->
     @last_event or
@@ -80,8 +83,8 @@ window.AWM.Classes.Ink = window.AWM.Classes.Ink or class Ink
     @mileage += @delta @current, @previous()
 
   colorize: ->
-    @context.strokeStyle = @options.color()
-    @context.fillStyle = @options.color()
+    @context.strokeStyle = @options.color @
+    @context.fillStyle = @options.color @
 
   line: (from, to, width) ->
     @colorize()

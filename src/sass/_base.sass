@@ -1,23 +1,25 @@
 // Super Basic
 
-*
-  +box-sizing(border-box)
+*,
+*::before,
+*::after
+  box-sizing: border-box
 
 html
   height: 100%
 
 body
   min-height: 100%
-
-body
   position: relative
   padding: 2rem 1rem
-  // background: hsl(180, 100%, 50%)
-  // +transform(skew(-6deg) rotate(-6deg)  )
+
   +mobile
     padding: 1rem 0.5rem
 
-header, main, footer
+
+header,
+main,
+footer
   position: relative
   z-index: 10
 
@@ -26,7 +28,3 @@ header, main, footer
 a
   text-decoration: underline
   color: inherit
-
-
-h1
-  // +transition(0.15s linear color)
