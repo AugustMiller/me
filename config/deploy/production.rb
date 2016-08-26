@@ -10,7 +10,7 @@
 set :app_domain, 'gusmiller.com'
 server fetch(:app_domain), user: 'deploy', roles: ['web']
 
-set :deploy_to, '/var/www/oof/gusmiller.com/production'
+set :deploy_to, '/var/www/oof/gusmiller.com/'
 
 # role-based syntax
 # ==================
