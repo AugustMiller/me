@@ -1,6 +1,7 @@
 app/content
 app/site/cache
-app/site/config
+app/site/config/*
+!app/site/config/config.php
 app/site/accounts
 app/assets/.sass-cache
 app/assets/css
