@@ -22,7 +22,7 @@ module.exports = class Ink
       width: @options.canvas_size * @scale()
       height: @options.canvas_size * @scale()
     @canvas.appendTo @options.canvas_frame
-    @canvas.width @options.canvas_size
+    @canvas.css 'width', "#{@options.canvas_size}px"
 
     @context = @canvas[0].getContext('2d')
     @context.lineJoin = "round";
