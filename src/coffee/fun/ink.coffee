@@ -6,8 +6,7 @@ Map = require 'util/number-map'
 module.exports = class Ink
   constructor: (options) ->
     @options = _.extend
-      color: (ink) ->
-        "hsl(#{ink.distance_drawn / 100 % 360}, 100%, 50%)"
+      color: (ink) -> 'black'
       splatter_threshold: 10
       max_brush_width: 10
       max_splats: 10
@@ -25,8 +24,8 @@ module.exports = class Ink
     @canvas.css 'width', "#{@options.canvas_size}px"
 
     @context = @canvas[0].getContext('2d')
-    @context.lineJoin = "round";
-    @context.lineCap = "butt";
+    @context.lineJoin = 'round'
+    @context.lineCap = 'butt'
 
     @listen()
 
