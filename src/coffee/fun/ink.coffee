@@ -2,6 +2,8 @@ _ = require 'underscore'
 $ = require 'cash-dom'
 
 Map = require 'util/number-map'
+RandomWithin = require 'util/number-random-within'
+RandomWithinRadius = require 'util/number-random-within-radius'
 
 module.exports = class Ink
   constructor: (options) ->
@@ -48,8 +50,8 @@ module.exports = class Ink
 
   trajectory: ->
     {
-      x: ( @current.x + (@current.x - @previous().x) * 2 ) * @scale()
-      y: ( @current.y + (@current.y - @previous().y) * 2 ) * @scale()
+      x: ( @current.x + (@current.x - @previous().x) * 2 )
+      y: ( @current.y + (@current.y - @previous().y) * 2 )
     }
 
   stroke_width: ->
@@ -65,7 +67,7 @@ module.exports = class Ink
     @distance_drawn += @delta()
     @context.beginPath()
     @line @previous(), @current, @stroke_width()
-    @splatter() if @velocity() > @options.splatter_threshold
+    @blot() if @velocity() > @options.splatter_threshold
   
   track: (e) ->
     now =
@@ -93,27 +95,26 @@ module.exports = class Ink
     @context.lineWidth = width
     @context.stroke()
 
-  splatter: ->
-    if Math.random() > 0.5
-      location = @trajectory()
-      size = Math.pow @velocity(), Math.random()
-      @spot location, size
+  splatter: (e) ->
+    for drop in [0..(Math.random() * @options.max_splats)]
+      point = RandomWithinRadius(@current.x, @current.y, @options.max_splats * 2)
+      @line @current, point, Math.random() * @options.max_brush_width
+      @spot point, Math.sqrt(Math.random() * 100)
 
   spot: (location, radius) ->
     @colorize()
     @context.beginPath()
-    @context.arc location.x, location.y, radius * @scale(), 0, 2 * Math.PI
+    @context.arc location.x * @scale(), location.y * @scale(), radius * @scale(), 0, 2 * Math.PI
     @context.fill()
 
   clear: ->
     @context.clearRect 0, 0, @canvas.width, canvas.height
 
-  blot: (e) ->
-    for drop in [0..(Math.random() * @options.max_splats)]
-      @spot
-        x: e.pageX.random_within 50
-        y: e.pageY.random_within 50
-      , Math.sqrt(Math.random() * 1000) 
+  blot: ->
+    if Math.random() > 0.5
+      location = @trajectory()
+      size = Math.pow @velocity(), Math.random()
+      @spot location, size
 
   change_color: (new_color) ->
     @context.strokeStyle = new_color
